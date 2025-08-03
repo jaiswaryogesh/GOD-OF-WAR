@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>God of War | PlayStation</title>
+  <!-- Boxicons CDN (for icons) -->
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Oswald:wght@300;400;600&display=swap');
+
+    body {
+      font-family: 'Oswald', sans-serif;
+      background-color: #0a0a0a;
+      color: #e0e0e0;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                  url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dd05cbec-9836-41db-ad86-29a96f43b06e.png') no-repeat center center;
+      background-size: cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gold-accent {
+      color: #cca66b;
+    }
+
+    .bg-gold-accent {
+      background-color: #cca66b;
+    }
+
+    .nav-item {
+      position: relative;
+      padding-bottom: 5px;
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #cca66b;
+      transition: width 0.3s ease;
+    }
+
+    .nav-item:hover::after {
+      width: 100%;
+    }
+
+    .character-card {
+      transition: transform 0.3s ease;
+      perspective: 1000px;
+    }
+
+    .character-card:hover {
+      transform: translateY(-10px) scale(1.03);
+    }
+
+    .gameplay-feature {
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .gameplay-feature:hover {
+      border-color: #cca66b;
+      box-shadow: 0 10px 25px rgba(204, 166, 107, 0.1);
+    }
+
+    .carousel {
+      scroll-behavior: smooth;
+    }
+
+    .carousel-container {
+      scroll-snap-type: x mandatory;
+    }
+
+    .carousel-slide {
+      scroll-snap-align: start;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .weapon-icon {
+      width: 60px;
+      height: 60px;
+      background-color: #1a1a1a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+   <!-- Navigation -->
+    <nav class="fixed w-full bg-black bg-opacity-80 z-50 px-4 py-3">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a1a6d43b-93d5-4ee1-80bc-e6d8d160c835.png" alt="God of War logo with Kratos' signature red tattoo design" class="mr-3" width="48" height="48" loading="lazy">
+                <span class="text-xl font-bold gold-accent">GOD OF WAR</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-item text-white hover:text-gold-accent">Home</a>
+                <a href="#story" class="nav-item text-white hover:text-gold-accent">Story</a>
+                <a href="#characters" class="nav-item text-white hover:text-gold-accent">Characters</a>
+                <a href="#gameplay" class="nav-item text-white hover:text-gold-accent">Gameplay</a>
+                <a href="#media" class="nav-item text-white hover:text-gold-accent">Media</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-white" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu" type="button">
+                <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+                <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-90 px-4 py-6 space-y-4 rounded-lg shadow-lg">
+            <a href="#home" class="block py-2 text-white hover:text-gold-accent">Home</a>
+            <a href="#story" class="block py-2 text-white hover:text-gold-accent">Story</a>
+            <a href="#characters" class="block py-2 text-white hover:text-gold-accent">Characters</a>
+            <a href="#gameplay" class="block py-2 text-white hover:text-gold-accent">Gameplay</a>
+            <a href="#media" class="block py-2 text-white hover:text-gold-accent">Media</a>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section id="home" class="hero fade-in">
+        <div class="container mx-auto px-4 text-center z-10">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 gold-accent">GOD OF WAR</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Embark on an epic and heartfelt journey as Kratos and Atreus through the Norse realms.</p>
+            <div class="space-x-4">
+                <a href="#" class="bg-gold-accent text-black font-bold px-8 py-3 rounded hover:bg-opacity-90 transition-all">BUY NOW</a>
+                <a href="#story" class="border border-gold-accent text-gold-accent font-bold px-8 py-3 rounded hover:bg-gold-accent hover:bg-opacity-10 transition-all">LEARN MORE</a>
+            </div>
+        </div>
+    </section>
+
+      <!-- Story Section -->
+    <section id="story" class="py-20 px-4">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center gold-accent">THE STORY</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <p class="mb-4 leading-relaxed">Kratos is a father again. As mentor and protector to Atreus, a son determined to earn his respect, he is forced to deal with and control the rage that has long defined him while out in a very dangerous world with his son.</p>
+                    <p class="mb-4 leading-relaxed">From the marble and columns of ornate Olympus to the rugged forests, mountains, and caves of pre-Viking Norse lore, the violent and chaotic journey of the Ghost of Sparta continues in God of War.</p>
+                    <p class="leading-relaxed">For the first time in the series, there are no loading screens. The cinematic camera never cuts, creating a seamless and immersive experience.</p>
+                </div>
+                <div class="order-1 md:order-2">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6c1d5d19-a3fd-46f7-9866-a0b3749e98fc.png" alt="Kratos and Atreus standing together in a snowy Nordic forest with mountains in background" class="rounded-lg shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Characters Section -->
+    <section id="characters" class="py-20 bg-black bg-opacity-30 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center gold-accent">CHARACTERS</h2>
+            
+            <div class="carousel-container flex overflow-x-auto pb-8" id="characters-carousel">
+                <div class="carousel flex space-x-8">
+                    <!-- Kratos -->
+                    <div class="carousel-slide character-card flex-shrink-0 w-72 bg-gray-900 rounded-lg overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/601d3b15-e6e6-46bb-895b-4833166e027d.png" alt="Kratos in his Norse armor with red tattoos glowing, holding the Leviathan Axe" class="w-full">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold gold-accent mb-2">Kratos</h3>
+                            <p class="text-gray-400">The Ghost of Sparta has left his bloody past in Greece behind and now lives as a man in the realm of Midgard. He must put aside the rage that has driven him for many years as he teaches his son to survive.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Atreus -->
+                    <div class="carousel-slide character-card flex-shrink-0 w-72 bg-gray-900 rounded-lg overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/06a2d00a-438c-479e-abfd-f9f09f376a22.png" alt="Young Atreus with a bow, looking determined in Nordic clothing" class="w-full">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold gold-accent mb-2">Atreus</h3>
+                            <p class="text-gray-400">Kratos' son, a curious and intelligent boy who just wants to understand what it means to be a god. His desire to prove himself worthy of family and responsibility becomes increasingly important.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Mimir -->
+                    <div class="carousel-slide character-card flex-shrink-0 w-72 bg-gray-900 rounded-lg overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1bd0fb5c-f7aa-4403-958b-7d1c24a4a8a8.png" alt="Mimir's severed head with glowing blue eyes, hanging from Kratos' belt" class="w-full">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold gold-accent mb-2">Mimir</h3>
+                            <p class="text-gray-400">The self-proclaimed Smartest Man Alive and former advisor to Odin. This severed head of Norse mythology serves as the duo's guide, providing knowledge about the Nine Realms.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Baldur -->
+                    <div class="carousel-slide character-card flex-shrink-0 w-72 bg-gray-900 rounded-lg overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e8db6b42-67c7-4003-a5f0-cc0ada8c3573.png" alt="Baldur the Stranger with glowing tattoos, in a fighting stance" class="w-full">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold gold-accent mb-2">Baldur</h3>
+                            <p class="text-gray-400">The Norse god of light and the estranged son of Odin and Freya. Baldur's invulnerability to all threats physical or magical has left him unable to feel anything, including pain or joy.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Freya -->
+                    <div class="carousel-slide character-card flex-shrink-0 w-72 bg-gray-900 rounded-lg overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5193a559-77c3-45fb-b83c-b6ef969aebbf.png" alt="Freya, the Witch of the Woods, in her magical hut surrounded by plants" class="w-full">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold gold-accent mb-2">Freya</h3>
+                            <p class="text-gray-400">A powerful witch living in the Wildwoods, Freya is the former queen of the Valkyries and mother to Baldur. Her deep connection to nature and magic makes her both ally and adversary.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center space-x-4 mt-6">
+                <button class="bg-gray-800 text-white px-4 py-2 rounded" onclick="document.getElementById('characters-carousel').scrollBy(-300, 0)">Previous</button>
+                <button class="bg-gray-800 text-white px-4 py-2 rounded" onclick="document.getElementById('characters-carousel').scrollBy(300, 0)">Next</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Gameplay Features -->
+    <section id="gameplay" class="py-20 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center gold-accent">GAMEPLAY FEATURES</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="gameplay-feature p-6 rounded-lg bg-gray-900">
+                    <div class="weapon-icon">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/afca544d-ba2e-42f9-b3e2-3d89c745927b.png" alt="Leviathan Axe icon with frost effects" class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">LEVIATHAN AXE</h3>
+                    <p class="text-gray-400 text-center">The mighty Leviathan Axe is a powerful and versatile weapon. Throw it to freeze enemies, solve puzzles, or recall it with satisfying precision to your hand.</p>
+                </div>
+                
+                <div class="gameplay-feature p-6 rounded-lg bg-gray-900">
+                    <div class="weapon-icon">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e0d79cd1-9db2-4b1f-a41f-418de4e14c40.png" alt="Blades of Chaos icon with fire effects" class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">BLADES OF CHAOS</h3>
+                    <p class="text-gray-400 text-center">Kratos' classic weapons return with new combat abilities. The fiery chains and brutal attacks offer crowd control against numerous enemies.</p>
+                </div>
+                
+                <div class="gameplay-feature p-6 rounded-lg bg-gray-900">
+                    <div class="weapon-icon">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5376ce1e-da82-4484-b81d-f331d630b2fc.png" alt="Atreus with bow icon" class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">ATREUS COMPANION</h3>
+                    <p class="text-gray-400 text-center">Atreus serves as a capable companion in battle, following your commands to shoot arrows while learning to fight alongside his father.</p>
+                </div>
+                
+                <div class="gameplay-feature p-6 rounded-lg bg-gray-900">
+                    <div class="weapon-icon">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f020bc71-bbe9-4f73-aac5-3084f68d2be1.png" alt="Valkyrie helmet icon" class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">VALKYRIE BATTLES</h3>
+                    <p class="text-gray-400 text-center">Optional but incredibly challenging encounters against the most powerful enemies in the game, requiring mastery of all combat mechanics.</p>
+                </div>
+                
+                <div class="gameplay-feature p-6 rounded-lg bg-gray-900">
+                    <div class="weapon-icon">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0951b1ef-ee2d-4bd3-a0ff-a6882c92b444.png" alt="Yggdrasil realm travel icon" class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">NINE REALMS</h3>
+                    <p class="text-gray-400 text-center">Explore the interconnected realms of Norse mythology, each with unique environments, enemies, stories, and rewards to discover.</p>
+                </div>
+                
+                <div class="gameplay-feature p-6 rounded-lg bg-gray-900">
+                    <div class="weapon-icon">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/009e8434-61fc-407e-af5b-e5a261e128fe.png" alt="Skill tree progression icon" class="w-8 h-8">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-3">CHARACTER PROGRESSION</h3>
+                    <p class="text-gray-400 text-center">Customize Kratos build with armor, talismans, and skills, while Atreus gains new abilities that open up new combat options.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Media Section -->
+    <section id="media" class="py-20 bg-black bg-opacity-30 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center gold-accent">GALLERY</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="overflow-hidden rounded-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a418fa78-d3c1-4164-a8e8-e1a328330a9b.png" alt="Kratos fighting a troll in a mountain pass during sunset" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="overflow-hidden rounded-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ad845049-3f00-459b-95f7-42d0289125a2.png" alt="Atreus riding a boat with Kratos crossing the Lake of Nine" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="overflow-hidden rounded-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e34a202b-0894-46c8-9dd0-133e8e463836.png" alt="Kratos solving a realm tower puzzle with moving gears" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="overflow-hidden rounded-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/979de2ec-1e2d-4f06-88a0-21a1e53f72b8.png" alt="Atreus reading runes in a dark cave with glowing blue carvings" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="overflow-hidden rounded-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6744f299-be03-4e34-a11a-c45f1b0ce4fb.png" alt="Dwarven blacksmith Brok working at his forge" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="overflow-hidden rounded-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/83b7c171-1fac-4807-bf37-e8c324807e5d.png" alt="Kratos standing on the bridge to Jötunheim with Atreus" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 px-4 bg-gradient-to-r from-gray-900 to-black">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 gold-accent">JOIN THE JOURNEY</h2>
+            <p class="text-xl mb-10 max-w-2xl mx-auto">Experience the critically acclaimed reimagining of the God of War franchise.</p>
+            <div class="space-x-4">
+                <a href="#" class="bg-gold-accent text-black font-bold px-8 py-3 rounded hover:bg-opacity-90 transition-all">BUY NOW</a>
+                <a href="#" class="border border-gold-accent text-gold-accent font-bold px-8 py-3 rounded hover:bg-gold-accent hover:bg-opacity-10 transition-all">WATCH TRAILER</a>
+            </div>
+        </div>
+    </section>
+
+
+ <footer class="bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white py-12 px-6" aria-label="Site footer">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
+    
+    <!-- Logo + Copyright -->
+    <div class="text-center md:text-left">
+      <div class="flex items-center justify-center md:justify-start space-x-3">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/94059aeb-0ad9-4834-a9d0-b92e3797dc6f.png"
+             alt="God of War logo"
+             class="w-10 h-10 rounded-full border-2 border-red-700" />
+        <span class="text-2xl font-bold text-yellow-400 tracking-wide">GOD OF WAR</span>
+      </div>
+      <p class="text-sm text-gray-400 mt-3">© 2022 Sony Interactive Entertainment LLC.</p>
+    </div>
+
+    <!-- Social Links -->
+    <div class="flex space-x-6">
+      <a href="#" aria-label="Facebook" class="hover:text-yellow-400 transition duration-300">
+        <i class="bx bxl-facebook text-2xl"></i>
+      </a>
+      <a href="#" aria-label="Instagram" class="hover:text-yellow-400 transition duration-300">
+        <i class="bx bxl-instagram text-2xl"></i>
+      </a>
+      <a href="#" aria-label="Twitter" class="hover:text-yellow-400 transition duration-300">
+        <i class="bx bxl-twitter text-2xl"></i>
+      </a>
+      <a href="#" aria-label="YouTube" class="hover:text-yellow-400 transition duration-300">
+        <i class="bx bxl-youtube text-2xl"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+  <script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  function toggleMenu() {
+    const isHidden = mobileMenu.classList.toggle('hidden');
+    mobileMenuButton.setAttribute('aria-expanded', !isHidden);
+    menuIcon.classList.toggle('hidden');
+    closeIcon.classList.toggle('hidden');
+  }
+
+  mobileMenuButton.addEventListener('click', toggleMenu);
+
+  // Keyboard accessibility: toggle menu on Enter or Space key
+  mobileMenuButton.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMenu();
+    }
+  });
+
+  // Close mobile menu when a link is clicked
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      mobileMenuButton.setAttribute('aria-expanded', false);
+      menuIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+    });
+  });
+</script>
+</body>
+</html>
